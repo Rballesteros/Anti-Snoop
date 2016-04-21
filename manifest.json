@@ -1,0 +1,21 @@
+{
+  "manifest_version": 2,
+
+  "name": "Anti-Snoop",
+  "description": "This extension monitors your browser when you are away",
+  "version": "1.0",
+
+  "browser_action": {
+    "default_icon": "Shield-512.png",
+    "default_popup": "popup.html"
+  },
+
+  "icons": { "16": "Shield-512.png",
+           "48": "Shield-512.png",
+          "128": "Shield-512.png" },
+
+  "permissions": [
+    "activeTab",
+    "https://ajax.googleapis.com/"
+  ]
+}
