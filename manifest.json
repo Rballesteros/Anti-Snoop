@@ -14,8 +14,10 @@
            "48": "Shield-512.png",
           "128": "Shield-512.png" },
 
-  "permissions": [
+  "permissions": [ 
+    "storage",
     "activeTab",
+    "tabs",
     "https://ajax.googleapis.com/"
   ]
 }
