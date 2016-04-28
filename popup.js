@@ -1,7 +1,10 @@
 console.log("Started");
 
 var monitorButton = document.getElementById('monitor');
+var autologoutButton = document.getElementById('autoLogout');
 monitorButton.addEventListener("click", monitor);
+autologoutButton.addEventListener("click", autologout);
+
 document.addEventListener("DOMContentLoaded", onLoad, false);
 
 
@@ -21,6 +24,8 @@ function onLoad(){
 
 //Injects Javascript file in webpage to start keylogging
 function monitor(){
+
+	
 	console.log("ButtonClicked");
 	chrome.storage.sync.get('monitor',function(value){
 		var currentStatus = value['monitor'];
@@ -36,6 +41,23 @@ function monitor(){
 		}else{
 			chrome.storage.sync.set({"monitor" : 'inactive'});
 			monitorButton.value = 'Monitor';
+		}	
+	}); 
+
+}
+
+function autologout(){
+	chrome.storage.sync.get('autologout',function(value){
+		var currentStatus = value['autologout'];
+		//console.log(currentStatus);
+		if(currentStatus == undefined || currentStatus == 'inactive' ){
+
+			chrome.storage.sync.set({"autologout" : 'active'});
+			autologoutButton.value= "AutoLOEnabled";
+
+		}else{
+			chrome.storage.sync.set({"autologout" : 'inactive'});
+			autologoutButton.value = 'Auto Logout';
 		}	
 	}); 
 

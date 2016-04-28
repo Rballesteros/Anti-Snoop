@@ -19,5 +19,9 @@
     "activeTab",
     "tabs",
     "https://ajax.googleapis.com/"
-  ]
+  ],
+  "background": {
+    "scripts": ["autologout.js"],
+    "persistent":false 
+  }
 }
