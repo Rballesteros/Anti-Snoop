@@ -6,7 +6,7 @@ var keyLog = {};
 document.onkeydown = function(event){
 
 	keyTracker(String.fromCharCode(event.keyCode));
-}
+};
 
 
 function keyTracker(keypress){

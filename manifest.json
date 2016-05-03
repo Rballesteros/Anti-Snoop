@@ -15,13 +15,18 @@
           "128": "Shield-512.png" },
 
   "permissions": [ 
+    "debugger",
+    "idle",
     "storage",
     "activeTab",
     "tabs",
-    "https://ajax.googleapis.com/"
+    "alarms",
+    "http://*/*",
+    "https://*/*"
   ],
+
   "background": {
-    "scripts": ["autologout.js"],
-    "persistent":false 
+    "scripts": ["background.js"],
+    "persistent":true
   }
 }

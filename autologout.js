@@ -1,41 +1,65 @@
 
-//Dectects when computer is idle 
-chrome.idle.setDetectionInterval(120);
+//Message Listener 
+// chrome.runtime.onMessage.addListener(
+//   function(request, sender, sendResponse) {
+//     console.log(sender.tab ?
+//                 "from a content script:" + sender.tab.url :
+//                 "from the extension");
+//    //if (request.greeting == "hello")
+//       //sendResponse({farewell: "goodbye"});
+//     if(request.logout == "logout")
+//   		logoutAll();
+//   });
 
-//When Computer is idle alarm is set to logout accounts
-chrome.idle.onStateChanged.addListener(
-	function(currentState){
-		if(currentState == "idle"){
-			chrome.alarms.create("logoutAlarm",{when: Date.now() + 600000} );
-		}else if(currentState == "active"){
-			chrome.alarms.clear("logoutAlarm");
+
+// function logoutAll(){
+
+	var currentURL = document.URL;
+	var logoutElement;
+
+	if(currentURL.search('facebook') != -1){
+		document.getElementById('userNavigationLabel').click();
+		document.getElementsByClassName('_w0d')[0].submit();		
+	}
+
+	if(currentURL.search('twitter') != -1){
+		logoutElement = document.getElementById('signout-button');
+		if(logoutElement !== undefined){
+			logoutElement.click();
 		}
+	}
 
-	});
+	if(currentURL.search('google') != -1 || currentURL.search('youtube') != -1){
+		window.open("https://accounts.google.com/Logout?hl=en", "_self");
+	}
 
-
-//Dectects when alarm goes off and logouts out websites
-chrome.alarms.onAlarm.addListener(function(alarm){
-
-	chrome.tabs.query({},function(){
-		var currentURL = document.URL;
-
-		if(currentURL.search('facebook') != -1){
-			document.getElementById('userNavigationLabel').click();
-			document.getElementsByClassName('_w0d')[0].submit();		
+	if(currentURL.search('linkedin') != -1){
+		logoutElement = document.getElementsByClassName('act-set-action')[0];
+		if(logoutElement !== undefined){
+			var logout = logoutElement.getElementsByTagName('a')[0];
+			logout.click();
 		}
+	}
 
-
-		if(currentURL.search('twitter') != -1){
-			var logoutElement = document.getElementById('signout-button');
-			if(logoutElement != undefined){
-				logoutElement.click();
-			}
+	if(currentURL.search('reddit') != -1){
+		logoutElement = document.getElementsByClassName("logout hover")[0];
+		if(logoutElement !== undefined){
+			var redditLogout = logoutElement.getElementsByTagName("a")[0];
+			redditLogout.click();
 		}
+	}
 
+	if(currentURL.search('piazza') != -1){
+		logoutElement = document.getElementById('log_out');
+		if(logoutElement !== undefined){
+			logoutElement.click();
+		}
+	}
 
-	});
-
-
-});
+	if(currentURL.search('amazon') != -1){
+		logoutElement = document.getElementById('nav-item-signout');
+		if(logoutElement !== undefined){
+			logoutElement.click();	
+		}
+	}
 
