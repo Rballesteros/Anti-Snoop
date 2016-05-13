@@ -10,7 +10,6 @@ Using Ant-Snoop Chrome extension
 - Click on Shield icon
 - Monitor button starts keylogger
 - To view Keylogs right click on shield icon and go to options
-
 - AutoLogout button starts autologout
 - For demo purposes autologout is set to 20 seconds idle time and then 5 seconds till script inject Javascript to log out of websites
 - So don't touch your computer for 25 seconds and it should log out of support websites
