@@ -2,16 +2,17 @@ console.log("Started");
 
 var monitorButton = document.getElementById('monitor');
 var autologoutButton = document.getElementById('autoLogout');
+//var screenShotButton = document.getElementById('screenShot');
 monitorButton.addEventListener("click", monitor);
 autologoutButton.addEventListener("click", autoLogout);
+// screenShotButton.addEventListener("click", screenShotSetting);
 
 document.addEventListener("DOMContentLoaded", onLoad, false);
 
-//Long-lived Connection for messages
+//Creates Long-lived Connection for messages
 var port = chrome.runtime.connect();
 
 console.log("message sent");
-
 
 
 
@@ -19,7 +20,7 @@ port.onMessage.addListener(function(msg) {
 });
 
 
-//---------------Set default values of popup.html onload-----------------//
+//---------------Set default values of popup.html onload-----------------/
 function onLoad(){
 	console.log('Setting Default Values');
 	chrome.storage.sync.get('monitor', function(value){
@@ -27,7 +28,7 @@ function onLoad(){
 		if(currentStatus === undefined || currentStatus == 'inactive' ){
 			monitorButton.value = 'Monitor';
 		}else{
-			monitorButton.value ='Active';
+			monitorButton.value ='M Enabled';
 		}
 	});
 
@@ -36,16 +37,14 @@ function onLoad(){
 		if(currentStatus === undefined || currentStatus == 'inactive' ){
 			autologoutButton.value = 'Auto Logout';
 		}else{
-			autologoutButton.value ='AutoLOEnabled';
+			autologoutButton.value ='AL Enabled';
 		}
 	});
-}
+} 
 
 
-//------------monitor front-	end implemenation------------------------//
+//------------monitor front-end implementation------------------------//
 function monitor(){
-
-
 	console.log("ButtonClicked");
 	chrome.storage.sync.get('monitor',function(value){
 		var currentStatus = value['monitor'];
@@ -53,14 +52,14 @@ function monitor(){
 		if(currentStatus === undefined || currentStatus == 'inactive' ){
 
 			chrome.storage.sync.set({"monitor" : 'active'});
-			monitorButton.value= "Active";
-	    	chrome.tabs.executeScript({
-	        file:'monitor.js',
-	        allFrames: true});
+			monitorButton.value= "M Enabled";
+			port.postMessage({keylogger: "active"});	
 
 		}else{
 			chrome.storage.sync.set({"monitor" : 'inactive'});
 			monitorButton.value = 'Monitor';
+			port.postMessage({keylogger: "inactive"});
+
 		}	
 	}); 
 
@@ -73,14 +72,9 @@ function autoLogout(){
 		//console.log(currentStatus);
 		if(currentStatus === undefined || currentStatus == 'inactive' ){
 			
-			autologoutButton.value= "AutoLOEnabled";
+			autologoutButton.value= "AL Enabled";
 			port.postMessage({autologout: "active"});
 			chrome.storage.sync.set({"autologout" : 'active'});
-
-			//For testing 
-			// chrome.tabs.executeScript({
-			// 	file:'autologout.js'
-			// });
 
 		}else{
 			autologoutButton.value = 'Auto Logout';
@@ -91,4 +85,24 @@ function autoLogout(){
 	}); 
 
 }
+
+/*
+function screenShotSetting(){
+	chrome.storage.sync.get('screenShot',function(value){
+		var currentStatus = value['screenShot'];
+		//console.log(currentStatus);
+		if(currentStatus === undefined || currentStatus == 'inactive' ){
+			
+			screenShotButton.value= "SCEnabled";
+			port.postMessage({screenShot: "active"});
+			chrome.storage.sync.set({"screenShot" : 'active'});
+
+		}else{
+			screenShotButton.value = 'screenShot';
+			port.postMessage({screenShot: "inactive"});
+			chrome.storage.sync.set({screenShot : 'inactive'});
+
+		}	
+	}); 
+}*/
 

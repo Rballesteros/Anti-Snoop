@@ -25,6 +25,8 @@
     "https://*/*"
   ],
 
+  "options_page": "dashboard.html",
+  
   "background": {
     "scripts": ["background.js"],
     "persistent":true
