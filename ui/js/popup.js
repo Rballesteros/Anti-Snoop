@@ -28,7 +28,7 @@ function onLoad(){
 		if(currentStatus === undefined || currentStatus == 'inactive' ){
 			monitorButton.value = 'Monitor';
 		}else{
-			monitorButton.value ='M Enabled';
+			monitorButton.value ='Monitor Enabled';
 		}
 	});
 
@@ -37,7 +37,7 @@ function onLoad(){
 		if(currentStatus === undefined || currentStatus == 'inactive' ){
 			autologoutButton.value = 'Auto Logout';
 		}else{
-			autologoutButton.value ='AL Enabled';
+			autologoutButton.value ='Auto Logout Enabled';
 		}
 	});
 } 
@@ -52,7 +52,7 @@ function monitor(){
 		if(currentStatus === undefined || currentStatus == 'inactive' ){
 
 			chrome.storage.sync.set({"monitor" : 'active'});
-			monitorButton.value= "M Enabled";
+			monitorButton.value= "Monitor Enabled";
 			port.postMessage({keylogger: "active"});	
 
 		}else{
@@ -72,7 +72,7 @@ function autoLogout(){
 		//console.log(currentStatus);
 		if(currentStatus === undefined || currentStatus == 'inactive' ){
 			
-			autologoutButton.value= "AL Enabled";
+			autologoutButton.value= "AutoLogout Enabled";
 			port.postMessage({autologout: "active"});
 			chrome.storage.sync.set({"autologout" : 'active'});
 

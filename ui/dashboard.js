@@ -1,6 +1,5 @@
 
-var clearLogButton = document.getElementById('clearLog');
-clearLogButton.addEventListener("click", clearLog);
+
 
 // var screenShotsButton = document.getElementById('screenShotsButton');
 // screenShotsButton.addEventListener("click", screenShotsLog);
@@ -9,6 +8,8 @@ clearLogButton.addEventListener("click", clearLog);
 // 	chrome.tabs.create({ url: "screenShots.html" });
 // }
 
+var clearLogButton = document.getElementById('clearLog');
+clearLogButton.addEventListener("click", clearLog);
 
 function clearLog(){
 	chrome.storage.local.clear();
@@ -17,14 +18,11 @@ function clearLog(){
 
 
 
-var keyLogResultDiv = document.getElementById("keyLoggerResults");
-var tableElement = document.createElement("TABLE");
+var tableElement = document.getElementById("keyLoggerResults");
 var tableBodyElement = document.createElement("TBODY");
-
-tableElement.border = '1'
 tableElement.appendChild(tableBodyElement);
 
-var headingText = ["TimeStamp & Url", "KeyStrokes"];
+var headingText = ["TimeStamp","Url", "KeyStrokes"];
 var headingRow = document.createElement("TR");
 tableBodyElement.appendChild(headingRow);
 
@@ -40,10 +38,14 @@ chrome.storage.local.get(null,function(keyStrokesLog){
 		if(key != 'monitor' || key != 'autologout'){
 			var dataRow = document.createElement("TR");
             var tdTimeStamp = document.createElement('TD');
+            var tdUrl = document.createElement('TD');
             var tdKeyStrokes = document.createElement('TD');
-            tdTimeStamp.appendChild(document.createTextNode(key));
+            var parsedTimeStamp = key.split(": ");
+            tdTimeStamp.appendChild(document.createTextNode(parsedTimeStamp[0]));
+            tdUrl.appendChild(document.createTextNode(parsedTimeStamp[1]));
             tdKeyStrokes.appendChild(document.createTextNode(keyStrokesLog[key]));
             dataRow.appendChild(tdTimeStamp);
+            dataRow.appendChild(tdUrl);
             dataRow.appendChild(tdKeyStrokes);
            	tableBodyElement.appendChild(dataRow);
         }

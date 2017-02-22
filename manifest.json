@@ -6,13 +6,13 @@
   "version": "1.0",
 
   "browser_action": {
-    "default_icon": "Shield-512.png",
-    "default_popup": "popup.html"
+    "default_icon": "ui/Shield.png",
+    "default_popup": "ui/popup.html"
   },
 
-  "icons": { "16": "Shield-512.png",
-           "48": "Shield-512.png",
-          "128": "Shield-512.png" },
+  "icons": { "16": "ui/Shield.png",
+           "48": "ui/Shield.png",
+          "128": "ui/Shield.png" },
 
   "permissions": [ 
     "debugger",
@@ -25,10 +25,10 @@
     "https://*/*"
   ],
 
-  "options_page": "dashboard.html",
+  "options_page": "ui/dashboard.html",
   
   "background": {
-    "scripts": ["background.js"],
+    "scripts": ["scripts/background.js"],
     "persistent":true
   }
 }

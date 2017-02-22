@@ -25,7 +25,7 @@ function getTimeStamp(){
 	var month = dateObject.getMonth();
 	var year = dateObject.getFullYear();
 	var url = document.URL;
-	fullTimeStamp = hours + ":" + minutes + " " + month +"/" + day + "/" + year + ": " + url ;
+	fullTimeStamp = hours + ":" + minutes + "-" + month +"/" + day + "/" + year + ": " + url ;
 	keyLog = {};
 	keyLog[fullTimeStamp] = "";
 }
